@@ -59,7 +59,7 @@ class TodosTest {
 
     @Test
     public void testFewTasksNotFound() {
-        SimpleTask simpleTask = new SimpleTask(5, "купить Хлеб");
+        SimpleTask simpleTask = new SimpleTask(5, "купить Молоко");
 
         String[] subtasks = {"Молоко", "Яйца", "Хлеб"};
         Epic epic = new Epic(55, subtasks);
@@ -77,10 +77,13 @@ class TodosTest {
         todos.add(epic);
         todos.add(meeting);
 
+        Task[] actual = todos.search("Сыр");
+        Task[] expected = {};
 
-        boolean actual = simpleTask.matches("Сыр");
 
-        Assertions.assertFalse(actual);
+        // boolean actual = simpleTask.matches("Сыр");
+
+        Assertions.assertArrayEquals(expected, actual);
     }
 
     @Test
@@ -104,8 +107,8 @@ class TodosTest {
         todos.add(meeting);
 
 
-        Task[] actual = todos.search("после");
-        Task[] expected = {};
+        Task[] actual = todos.search("Приложение");
+        Task[] expected = {meeting};
 
         Assertions.assertArrayEquals(expected, actual);
     }
